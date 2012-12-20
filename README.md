@@ -36,7 +36,7 @@ app.listen(3000);
 console.log("Server listening on port 3000");
 ```
 
-So everytime a user requests a `js/script.js`, and the middleware isn't able to find it in `./public/js`, then it will look in `./src/js`. If it finds it, it will then 
+So everytime a user requests a `js/script.js`, and the middleware isn't able to find it in `./public/js`, then it will look in `./src/js`. If it finds it, it will then wrap the `.js` file with a define call.
 
 ## Development
 
