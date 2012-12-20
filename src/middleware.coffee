@@ -62,6 +62,7 @@ module.exports = (options = {}) ->
 
 module.exports.toCommonJs = toCommonJs = (str) ->
   requireCalls = str.match /require\((\s+)?('[^'\\]*(?:\\.[^'\\]*)*'|"[^"\\]*(?:\\.[^"\\]*)*")(\s+)?\)/g
+  requireCalls = [] unless requireCalls?  
   requireCalls = requireCalls.map (str) ->
     return (str.match /('[^'\\]*(?:\\.[^'\\]*)*'|"[^"\\]*(?:\\.[^"\\]*)*")/)[0]
   str = "define([#{requireCalls.join ', '}], function () {\nvar module = { exports: {} };\n\n#{str}\n\nreturn module.exports;\n});"
