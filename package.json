@@ -1,0 +1,29 @@
+{
+  "name": "connect-commonjs-amd",
+  "description": "Write JavaScript. Convert it into AMD.",
+  "keywords": [
+    "modules",
+    "amd",
+    "commonjs"
+  ],
+  "version": "0.0.1",
+  "author": "Salehen Shovon Rahman <salehen.rahman@gmail.com>",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/shovon/connect-commonjs-amd/master/LICENSE"
+    }
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "expect.js": "~0.2.0",
+    "rimraf": "~2.0.3"
+  },
+  "dependencies": {
+    "debug": "~0.7.0",
+    "mkdirp": "~0.3.4",
+    "underscore": "~1.4.3"
+  }
+}
