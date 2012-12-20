@@ -89,6 +89,8 @@ module.exports.greeting = "Hello, World!";
 
 Start your server and go to your browser. You should see an alert box show with the string "Hello, World!".
 
+You can find a slightly modified version of the above example, [here](https://github.com/shovon/connect-commonjs-amd/tree/master/test-server).
+
 ## Development
 
 ### Testing
