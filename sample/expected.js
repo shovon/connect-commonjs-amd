@@ -1,5 +1,8 @@
 define(['foo', 'something'], function () {
-var module = { exports: {} };
+var module = { exports: {} }
+  , exports = module.exports;
+
+(function () {
 
 var foo = require('foo')
   , something = require('something');
@@ -7,6 +10,8 @@ var foo = require('foo')
 module.exports.another = function () {
   return foo.another(something);
 };
+
+})();
 
 return module.exports;
 });

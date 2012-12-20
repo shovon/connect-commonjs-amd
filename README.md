@@ -29,14 +29,65 @@ app.use(require('connect-commonjs-amd')({
   , dest: path.join(__dirname, 'public')
 }));
 
-app.use(express.static(public));
+app.use(express.static(publicFolder));
 
 app.listen(3000);
 
 console.log("Server listening on port 3000");
 ```
 
-So everytime a user requests a `js/script.js`, and the middleware isn't able to find it in `./public/js`, then it will look in `./src/js`. If it finds it, it will then wrap the `.js` file with a define call.
+So everytime a user requests a `js/script.js`, and the middleware isn't able to find it in `./public/js`, then it will look in `./src/js`. If it finds it there, it will then wrap the JavaScript with a define call, and then save it in `./public/js`.
+
+If you want to try it out, here's how. I'm going to assume that your source tree looks like so.
+
+* *project-directory/*
+    * *server.js* (the above server code)
+    * *package.json*
+    * *public/*
+        * *index.html*
+        * *js/*
+            * *require.js* (assuming that you use RequireJS as the AMD loader)
+    * *src/*
+        * *app/*
+            * *foo.js*
+            * *script.js*
+
+Here's what your `public/index.html` might look like.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My App</title>
+  </head>
+  <script type="text/javascript" src="js/require.js"></script>
+  <script type="text/javascript">
+  require(['app/script'], function () {
+    var script = require('script');
+    script.init();
+  });
+  </script>
+</html>
+```
+
+And perhaps your `public/src/app/script.js` might look like this.
+
+```javascript
+var foo = require('app/foo');
+
+module.exports.init = function () {
+  alert(foo.greeting);
+};
+```
+
+And your `public/src/app/foo.js` might look like this.
+
+```javascript
+module.exports.greeting = "Hello, World!";
+```
+
+Start your server and go to your browser. You should see an alert box show with the string "Hello, World!".
 
 ## Development
 

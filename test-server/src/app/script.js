@@ -1,6 +1,5 @@
-var message = require('app/message');
-module.exports = {
-  init: function () {
-    console.log(message.message);
-  }
+var foo = require('app/foo');
+
+module.exports.init = function () {
+  alert(foo.greeting);
 };
