@@ -11,7 +11,7 @@ server = express()
 server.configure ->
   server.use express.bodyParser()
   server.use express.methodOverride()
-  server.use require('../src/middleware.coffee')({
+  server.use require('../index.js')({
     src: srcFolder
     dest: publicFolder
   })

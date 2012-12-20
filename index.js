@@ -1,2 +1,2 @@
 require('coffee-script');
-module.exports = require('src/middleware.coffee');
+module.exports = require('./src/middleware.coffee');
