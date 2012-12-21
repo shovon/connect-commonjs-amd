@@ -91,6 +91,62 @@ Start your server and go to your browser. You should see an alert box show with 
 
 You can find a slightly modified version of the above example, [here](https://github.com/shovon/connect-commonjs-amd/tree/master/test-server).
 
+## API
+
+### `toCommonJs`
+
+`connect-commonjs-amd` has one function that you can call without using the module as a middleware. `toCommonjs` is that function.
+
+```javascript
+var connectCommonJsAmd = require('connect-commonjs-amd')
+  , sourceCode = 'console.log("Hello, World!");'
+
+connectCommonJsAmd.toCommonJs(sourceCode);
+```
+
+## What about CoffeeScript?
+
+You can use this module's `toCommonJs` function, in conjunction with the <a href="https://github.com/wdavidw/node-connect-coffee-script" target="_blank">`connect-coffee-script`</a> module.
+
+```javascript
+var express = require('express')
+  , path = require('path')
+  , connectCommonJsAmd = require('connect-commonjs-amd')
+  , port = process.argv[2] || 3000
+  , publicFolder = path.join(__dirname, 'public')
+  , server = express()
+  , srcFolder = path.join(__dirname, 'src');
+
+server.configure(function() {
+  server.use(express.bodyParser());
+  server.use(express.methodOverride());
+
+  // Convert all your CommonJS CoffeeScript to AMD.
+  server.use(require('connect-coffee-script')({
+      src: srcFolder
+    , dest: publicFolder
+    , compile: function (str, options) {
+      options.bare = true;
+      code = CoffeeScript.compile(str, options);
+      // Here's the call to `toCommonJs`.
+      return connectCommonJsAmd.toCommonJs(code);
+    }
+  }));
+  server.use(express["static"](publicFolder));
+
+  server.use(express.errorHandler({
+    dumpException: true,
+    showStack: true
+  }));
+  server.use(server.router);
+});
+
+server.listen(port);
+
+console.log("Server listening on port " + port);
+
+```
+
 ## Development
 
 ### Testing
