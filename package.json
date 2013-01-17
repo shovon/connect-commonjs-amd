@@ -6,7 +6,7 @@
     "amd",
     "commonjs"
   ],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Salehen Shovon Rahman <salehen.rahman@gmail.com>",
   "licenses": [
     {
@@ -30,6 +30,7 @@
   "dependencies": {
     "debug": "~0.7.0",
     "mkdirp": "~0.3.4",
-    "underscore": "~1.4.3"
+    "underscore": "~1.4.3",
+    "coffee-script": "~1.4.0"
   }
 }
